@@ -3,58 +3,577 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description"
-        content="Soumen Podder — Technology and Engineering Leader based in the Netherlands.">
+  <meta name="description" content="Soumen Podder: technology and engineering leadership, enterprise architecture and transformation. Based in The Hague, Netherlands.">
+  <meta name="theme-color" content="#172b43">
   <title>Soumen Podder | Technology & Engineering Leader</title>
+
   <style>
+    /* Design tokens: change these to update the site's visual identity. */
+    :root {
+      --navy: #172b43;
+      --teal: #075e69;
+      --paper: #f7f5f0;
+      --white: #ffffff;
+      --muted: #526170;
+      --line: #d9dedf;
+      --width: 1100px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
     body {
       margin: 0;
-      background: #f7f5f0;
-      color: #172b43;
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
+      color: var(--navy);
+      background: var(--paper);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.7;
     }
-    main {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 80px 24px;
+    a { color: var(--teal); text-underline-offset: 4px; }
+    a:hover { text-decoration-thickness: 2px; }
+    a:focus-visible, summary:focus-visible {
+      outline: 3px solid var(--teal);
+      outline-offset: 5px;
     }
+    h1, h2, h3 { line-height: 1.2; }
     h1 {
-      font-size: clamp(36px, 7vw, 64px);
-      line-height: 1.1;
-      margin-bottom: 16px;
+      font-size: clamp(42px, 7vw, 78px);
+      letter-spacing: -2px;
+      margin: 18px 0;
     }
     h2 {
-      font-size: 24px;
-      font-weight: normal;
+      font-size: clamp(30px, 4vw, 44px);
+      letter-spacing: -1px;
+      margin: 12px 0 22px;
     }
-    p { max-width: 650px; }
-    a { color: #075e69; }
-    a:focus-visible {
-      outline: 3px solid #075e69;
-      outline-offset: 4px;
+    h3 { font-size: 23px; margin: 0 0 14px; }
+    p { margin: 0 0 18px; }
+    .wrap { max-width: var(--width); margin: auto; padding: 0 28px; }
+    .eyebrow {
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--teal);
+    }
+    .muted { color: var(--muted); }
+    .intro { max-width: 700px; font-size: 19px; }
+    section { padding: 76px 0; border-bottom: 1px solid var(--line); }
+
+    /* Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding-top: 18px;
+      padding-bottom: 18px;
+    }
+    .brand { color: var(--navy); font-weight: bold; text-decoration: none; }
+    nav { display: flex; flex-wrap: wrap; gap: 20px; }
+    nav a { color: var(--navy); font-size: 14px; text-decoration: none; }
+    nav a:hover { text-decoration: underline; }
+    .skip {
+      position: absolute;
+      left: 12px;
+      top: -100px;
+      padding: 10px;
+      background: var(--white);
+      z-index: 20;
+    }
+    .skip:focus { top: 12px; }
+
+    /* Introduction and evidence */
+    .hero { padding: 100px 0 80px; }
+    .hero h2 { font-size: clamp(24px, 3vw, 34px); letter-spacing: 0; }
+    .actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+    .button {
+      display: inline-block;
+      padding: 12px 22px;
+      border: 1px solid var(--teal);
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .button.primary { color: var(--white); background: var(--teal); }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 52px;
+      padding-top: 28px;
+      border-top: 1px solid var(--line);
+    }
+    .stat strong { display: block; font-size: 38px; line-height: 1.3; }
+    .stat span { display: block; color: var(--muted); font-size: 14px; }
+
+    /* Case studies */
+    .case {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 24px;
+      padding: 34px 0;
+      border-top: 1px solid var(--line);
+    }
+    .case-number { font-size: 34px; color: var(--teal); }
+    .case-body { max-width: 850px; }
+    .case .context { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+    .result {
+      padding: 18px 22px;
+      background: var(--white);
+      border-left: 3px solid var(--teal);
+      margin: 20px 0;
+    }
+    details { margin-top: 18px; }
+    summary { cursor: pointer; color: var(--teal); font-weight: bold; }
+    details p { margin-top: 14px; }
+
+    /* Capabilities and perspectives */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 34px;
+    }
+    .capability { border-top: 2px solid var(--teal); padding-top: 20px; }
+    .capability h3 { font-size: 20px; }
+    .capability p { color: var(--muted); font-size: 16px; }
+    .note {
+      background: var(--white);
+      border: 1px solid var(--line);
+      padding: 26px;
+      border-radius: 6px;
+    }
+    .note .eyebrow { margin-bottom: 18px; }
+    .note h3 { font-size: 22px; }
+
+    /* Career */
+    .timeline { list-style: none; padding: 0; margin: 32px 0 0; }
+    .timeline li {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 28px;
+      padding: 24px 0;
+      border-top: 1px solid var(--line);
+    }
+    .timeline time { color: var(--muted); font-size: 14px; }
+    .timeline h3 { font-size: 20px; margin-bottom: 8px; }
+    .timeline p { margin: 0; color: var(--muted); }
+    .contact { background: var(--navy); color: var(--white); }
+    .contact .eyebrow, .contact a { color: #a9e1da; }
+    .contact .button { border-color: #a9e1da; }
+    footer { padding: 24px 0; font-size: 13px; color: var(--muted); }
+
+    /* Mobile layouts */
+    @media (max-width: 760px) {
+      .nav { align-items: flex-start; flex-direction: column; gap: 10px; }
+      nav { gap: 14px; }
+      .hero { padding-top: 60px; }
+      section { padding: 52px 0; }
+      .grid { grid-template-columns: 1fr; }
+      .stats { gap: 16px; }
+      .stat strong { font-size: 29px; }
+      .case { grid-template-columns: 1fr; gap: 10px; }
+      .timeline li { grid-template-columns: 1fr; gap: 8px; }
+      html { scroll-padding-top: 130px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
     }
   </style>
 </head>
+
 <body>
-  <main>
-    <p>The Hague, Netherlands</p>
-    <h1>Soumen Podder</h1>
-    <h2>Technology & Engineering Leader</h2>
-    <p>
-      Connecting business priorities, technology strategy and execution
-      across global engineering organisations and complex transformation
-      portfolios.
-    </p>
-    <p>
-      My experience spans software engineering, enterprise architecture,
-      technology transformation and global portfolio leadership.
-    </p>
-    <p>
-      <a href="https://www.linkedin.com/in/soumen-podder-02979416/">
-        Connect with me on LinkedIn
-      </a>
-    </p>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#main">Soumen Podder</a>
+      <nav aria-label="Main navigation">
+        <a href="#work">Selected work</a>
+        <a href="#capabilities">Capabilities</a>
+        <a href="#perspectives">Perspectives</a>
+        <a href="#career">Career</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow">The Hague, Netherlands</p>
+        <h1>Soumen Podder</h1>
+        <h2>Technology & Engineering Leader</h2>
+        <p class="intro">
+          Connecting business priorities, technology strategy and execution.
+          Building the teams, architecture and operating models that turn
+          complex transformation into sustained progress.
+        </p>
+        <p class="intro muted">
+          My career spans software engineering, enterprise architecture,
+          global engineering and operations leadership, and technology
+          portfolio management across European organisations.
+        </p>
+        <div class="actions">
+          <a class="button primary" href="#work">Explore my experience</a>
+          <a class="button"
+             href="https://www.linkedin.com/in/soumen-podder-02979416/">
+            Connect on LinkedIn
+          </a>
+        </div>
+        <div class="stats" aria-label="Selected career scope">
+          <div class="stat">
+            <strong>21+ years</strong>
+            <span>From engineering to technology leadership</span>
+          </div>
+          <div class="stat">
+            <strong>400+</strong>
+            <span>Global organisation led through managers and technical leaders</span>
+          </div>
+          <div class="stat">
+            <strong>$25M+</strong>
+            <span>Annual technology services portfolio accountability</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="work">
+      <div class="wrap">
+        <p class="eyebrow">Experience in practice</p>
+        <h2>Selected transformations</h2>
+        <p class="intro muted">
+          Examples from my work at Tata Consultancy Services.
+          Client organisations are described by sector.
+        </p>
+
+        <article class="case">
+          <div class="case-number" aria-hidden="true">01</div>
+          <div class="case-body">
+            <p class="context">Telecommunications · Belgium · 2019–2022</p>
+            <h3>Leading engineering and operations at scale</h3>
+            <p>
+              Led a distributed organisation of more than 400 professionals
+              across Digital Channels, CRM, Billing, Servicing and Data
+              Platforms, with accountability for a $25M+ annual technology
+              services portfolio.
+            </p>
+            <p>
+              My remit connected workforce planning, service performance,
+              transformation execution and commercial outcomes. I worked
+              through engineering managers and technical leaders, aligning
+              distributed teams with executive priorities.
+            </p>
+            <div class="result">
+              <strong>Scope:</strong> Organisation and portfolio leadership
+              across business-critical technology domains, alongside data,
+              CRM, billing and DevOps modernization.
+            </div>
+            <details>
+              <summary>Leadership contribution</summary>
+              <p>
+                Connected executive priorities with capacity and delivery
+                commitments; led cross-domain transformation and managed
+                sourcing, SLA/KPI models and delivery economics across
+                a multi-vendor environment.
+              </p>
+            </details>
+          </div>
+        </article>
+
+        <article class="case">
+          <div class="case-number" aria-hidden="true">02</div>
+          <div class="case-body">
+            <p class="context">Workforce services · Netherlands · Current portfolio</p>
+            <h3>Transforming Quality Engineering around outcomes</h3>
+            <p>
+              Led Quality Engineering transformation toward an autonomous,
+              outcome-based managed-services model, combining AI/GenAI-enabled
+              automation with continuous improvement.
+            </p>
+            <p>
+              My contribution spans capability development, portfolio
+              priorities, demand and capacity, and stakeholder alignment
+              across Global Testing Services and customer-facing web platforms.
+            </p>
+            <div class="result">
+              <strong>Reported programme outcomes:</strong>
+              More than 30% cost savings, more than 25% cycle-time reduction
+              and more than 98% defect containment.
+            </div>
+            <details>
+              <summary>Leadership contribution</summary>
+              <p>
+                Connected the operating-model change with delivery performance
+                and capability development, using outcome measures to guide
+                improvement. These figures relate specifically to the
+                Quality Engineering initiative.
+              </p>
+            </details>
+          </div>
+        </article>
+
+        <article class="case">
+          <div class="case-number" aria-hidden="true">03</div>
+          <div class="case-body">
+            <p class="context">Workforce services · Delivery platform consolidation</p>
+            <h3>Creating a common foundation for engineering delivery</h3>
+            <p>
+              Defined the high-level approach and target operating model for
+              consolidating eight Azure DevOps organisations into one central
+              organisation with multiple projects. Owned programme delivery
+              and established governance.
+            </p>
+            <p>
+              The eight-month consolidation covered more than 3,000 users
+              and addressed work-item hierarchy, repositories, pipelines,
+              environments, access controls and quality gates.
+            </p>
+            <div class="result">
+              <strong>Delivered:</strong> Consolidation and a central release
+              calendar for cross-project visibility.<br>
+              <strong>In progress:</strong> Central release-management governance.
+              Release-performance benefits have not yet been measured.
+            </div>
+            <details>
+              <summary>Migration challenge and response</summary>
+              <p>
+                A large partner team operating across several geographies had
+                a narrow cutover window and substantial changes to migrate.
+                The delivery team ran daily incremental migrations for three
+                weeks to make the final migration possible within that window.
+                My role was programme ownership; the team owned the detailed
+                migration execution.
+              </p>
+            </details>
+          </div>
+        </article>
+
+        <article class="case">
+          <div class="case-number" aria-hidden="true">04</div>
+          <div class="case-body">
+            <p class="context">Telecommunications · Belgium · 2016–2019</p>
+            <h3>Connecting enterprise architecture with transformation</h3>
+            <p>
+              Defined enterprise architecture strategy, target-state blueprints
+              and transition roadmaps across Lead-to-Cash, Billing and
+              Trouble-to-Resolve transformations.
+            </p>
+            <p>
+              Established and led Architecture Review Board governance across
+              application, data, integration, cloud and digital architecture,
+              aligning programme decisions with enterprise direction.
+            </p>
+            <div class="result">
+              <strong>Contribution:</strong> A shared architecture direction,
+              transition roadmaps and a governance forum connecting technology
+              choices with business priorities, risk and standards.
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="capabilities">
+      <div class="wrap">
+        <p class="eyebrow">Where I contribute</p>
+        <h2>Leadership across the technology lifecycle</h2>
+        <div class="grid">
+          <div class="capability">
+            <h3>People & organisation</h3>
+            <p>Global organisations, leadership through managers and technical
+              experts, workforce planning and capability development.</p>
+          </div>
+          <div class="capability">
+            <h3>Strategy & investment</h3>
+            <p>Technology roadmaps, portfolio priorities, capacity trade-offs,
+              executive alignment and commercial accountability.</p>
+          </div>
+          <div class="capability">
+            <h3>Architecture & modernization</h3>
+            <p>Enterprise blueprints, transition roadmaps, cross-domain
+              governance and application, data and digital transformation.</p>
+          </div>
+          <div class="capability">
+            <h3>Engineering excellence</h3>
+            <p>Quality Engineering, DevOps standardization, release governance
+              and AI-enabled improvement across the delivery lifecycle.</p>
+          </div>
+          <div class="capability">
+            <h3>Platforms & execution</h3>
+            <p>Customer-facing web platforms, demand management, dependencies
+              and delivery performance across distributed teams.</p>
+          </div>
+          <div class="capability">
+            <h3>Partners & governance</h3>
+            <p>Multi-vendor delivery, strategic technology partnerships,
+              service outcomes, sourcing and delivery economics.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="perspectives">
+      <div class="wrap">
+        <p class="eyebrow">How I think</p>
+        <h2>Perspectives</h2>
+        <p class="intro muted">
+          Short reflections on engineering and architecture leadership.
+        </p>
+        <div class="grid">
+          <article class="note">
+            <p class="eyebrow">Architecture leadership</p>
+            <h3>Autonomy needs clear boundaries</h3>
+            <p>
+              Teams need room to make decisions close to their work.
+              Enterprise alignment starts with clarity about which decisions
+              stay local and which create consequences across teams.
+            </p>
+            <details>
+              <summary>Read the perspective</summary>
+              <p>
+                I favour shared principles, reusable patterns and explicit
+                decision rights. Architecture review should concentrate on
+                cross-domain dependencies and choices that are costly to
+                reverse, while giving teams a clear path for routine decisions.
+                The leadership challenge is to make those boundaries useful
+                in daily engineering work.
+              </p>
+            </details>
+          </article>
+          <article class="note">
+            <p class="eyebrow">AI & engineering</p>
+            <h3>Automation changes work. Ownership still matters.</h3>
+            <p>
+              As AI agents take on more engineering tasks, leaders need to
+              clarify who owns the result, how quality is checked and when
+              a human decision is required.
+            </p>
+            <details>
+              <summary>Read the perspective</summary>
+              <p>
+                My starting point is the workflow: the agent's permitted
+                actions, the evidence required before release and the owner
+                accountable for the outcome. I would assess adoption through
+                quality, flow and operational impact. More generated output
+                alone would not demonstrate a better engineering system.
+              </p>
+            </details>
+          </article>
+          <article class="note">
+            <p class="eyebrow">Engineering operating models</p>
+            <h3>Measure the journey from idea to outcome</h3>
+            <p>
+              Engineering performance depends on the whole delivery system:
+              priorities, hand-offs, dependencies, quality and operations.
+            </p>
+            <details>
+              <summary>Read the perspective</summary>
+              <p>
+                I look for where work waits and why. Better visibility across
+                teams can expose constraints that local productivity measures
+                miss. A useful leadership view combines delivery flow with
+                quality, reliability and business outcomes, then uses that
+                evidence to choose the next improvement.
+              </p>
+            </details>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="career">
+      <div class="wrap">
+        <p class="eyebrow">Career journey</p>
+        <h2>Engineering foundations. Enterprise perspective.</h2>
+        <p class="intro muted">
+          Tata Consultancy Services · Roles across the Netherlands,
+          Belgium, Denmark, the United Kingdom and India.
+        </p>
+        <ol class="timeline">
+          <li>
+            <time>2025–Present</time>
+            <div>
+              <h3>Senior Portfolio Manager · Netherlands</h3>
+              <p>Web Platform Engineering, Global Testing Services,
+                Quality Engineering transformation and portfolio priorities.</p>
+            </div>
+          </li>
+          <li>
+            <time>2022–2024</time>
+            <div>
+              <h3>Client Partner · Netherlands</h3>
+              <p>Technology portfolios and executive relationships across
+                European telecom accounts generating $10M–$15M annually.</p>
+            </div>
+          </li>
+          <li>
+            <time>2019–2022</time>
+            <div>
+              <h3>Business Relationship Manager — Engineering Delivery · Belgium</h3>
+              <p>400+ global organisation and $25M+ annual technology
+                services portfolio.</p>
+            </div>
+          </li>
+          <li>
+            <time>2016–2019</time>
+            <div>
+              <h3>Enterprise Architect · Belgium</h3>
+              <p>Enterprise strategy, target-state architecture,
+                transition roadmaps and Architecture Review Board leadership.</p>
+            </div>
+          </li>
+          <li>
+            <time>2015–2016</time>
+            <div>
+              <h3>Engagement Manager · Denmark</h3>
+              <p>$17M technology portfolio and a 200+ person delivery organisation.</p>
+            </div>
+          </li>
+          <li>
+            <time>2008–2015</time>
+            <div>
+              <h3>Solution Architect / Delivery Manager · Denmark & UK</h3>
+              <p>Telecom transformation, architecture teams and
+                Agile engineering delivery.</p>
+            </div>
+          </li>
+          <li>
+            <time>2005–2008</time>
+            <div>
+              <h3>Solution Designer & Java Developer · India & UK</h3>
+              <p>Software engineering, web services, APIs and enterprise integration.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="wrap">
+        <p class="eyebrow">Start a conversation</p>
+        <h2>Let’s connect.</h2>
+        <p class="intro">
+          I welcome conversations about technology and engineering leadership,
+          enterprise architecture and transformation.
+        </p>
+        <a class="button"
+           href="https://www.linkedin.com/in/soumen-podder-02979416/">
+          Connect with me on LinkedIn
+        </a>
+      </div>
+    </section>
   </main>
+
+  <footer>
+    <div class="wrap">© 2026 Soumen Podder · The Hague, Netherlands</div>
+  </footer>
 </body>
 </html>
